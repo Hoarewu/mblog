@@ -12,7 +12,12 @@ File Encoding         : 65001
 
 Date: 2019-01-18 22:17:57
 */
-
+/*
+DROP DATABASE IF EXISTS  `db_mblog`;
+CREATE DATABASE `db_mblog`;
+USE `db_mblog`;
+*/
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -22,7 +27,7 @@ DROP TABLE IF EXISTS `mto_channel`;
 CREATE TABLE `mto_channel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `key_` varchar(32) DEFAULT NULL,
-  `name` varchar(32) DEFAULT NULL,
+  `name` varchar(32) character set `utf8` collate `utf8_general_mysql500_ci` DEFAULT NULL,
   `status` int(5) NOT NULL,
   `thumbnail` varchar(128) DEFAULT NULL,
   `weight` int(11) NOT NULL,
@@ -45,7 +50,7 @@ CREATE TABLE `mto_options` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `key_` varchar(32) DEFAULT NULL,
   `type` int(5) DEFAULT 0,
-  `value` varchar(300) DEFAULT NULL,
+  `value` varchar(300) character set `utf8` collate `utf8_general_mysql500_ci` DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -76,7 +81,7 @@ DROP TABLE IF EXISTS `mto_user`;
 CREATE TABLE `mto_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) DEFAULT NULL,
-  `name` varchar(32) DEFAULT NULL,
+  `name` varchar(32) character set `utf8` collate `utf8_general_mysql500_ci` DEFAULT NULL,
   `avatar` varchar(128) DEFAULT '/dist/images/ava/default.png',
   `email` varchar(64) DEFAULT NULL,
   `password` varchar(64) DEFAULT NULL,
@@ -124,7 +129,7 @@ CREATE TABLE `mto_user_oauth` (
 DROP TABLE IF EXISTS `shiro_permission`;
 CREATE TABLE `shiro_permission` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `description` varchar(140) DEFAULT NULL,
+  `description` varchar(140) character set `utf8` collate `utf8_general_mysql500_ci` DEFAULT NULL,
   `name` varchar(32) NOT NULL,
   `parent_id` bigint(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
@@ -141,7 +146,7 @@ INSERT INTO `shiro_permission` VALUES ('2', '栏目管理', 'channel:list', '0',
 INSERT INTO `shiro_permission` VALUES ('3', '编辑栏目', 'channel:update', '2', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('4', '删除栏目', 'channel:delete', '2', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('5', '文章管理', 'post:list', '0', '0', '0');
-INSERT INTO `shiro_permission` VALUES ('6', '编辑文章', 'post:update', '5', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('6', '更新文章', 'post:update', '5', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('7', '删除文章', 'post:delete', '5', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('8', '评论管理', 'comment:list', '0', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('9', '删除评论', 'comment:delete', '8', '0', '0');
@@ -156,6 +161,9 @@ INSERT INTO `shiro_permission` VALUES ('17', '删除角色', 'role:delete', '15'
 INSERT INTO `shiro_permission` VALUES ('18', '主题管理', 'theme:index', '0', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('19', '系统配置', 'options:index', '0', '0', '0');
 INSERT INTO `shiro_permission` VALUES ('20', '修改配置', 'options:update', '19', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('21', '编辑文章', 'post:editing', '0', '0', '0');
+INSERT INTO `shiro_permission` VALUES ('22', '发布文章', 'post:submit', '21', '0', '0');
+
 
 -- ----------------------------
 -- Table structure for shiro_role

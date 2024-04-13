@@ -104,9 +104,11 @@
 
 				<#if profile??>
                     <@controls name="post">
-                        <li>
-                            <a href="${base}/post/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
-                        </li>
+                        <@shiro.hasPermission name="admin">
+                            <li>
+                                <a href="${base}/post/editing" class="plus"><i class="icon icon-note"></i> 写文章</a>
+                            </li>
+                         </@shiro.hasPermission>
                     </@controls>
                     <li class="dropdown">
                         <a href="#" class="user dropdown-toggle" data-toggle="dropdown">

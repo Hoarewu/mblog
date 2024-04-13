@@ -13,6 +13,7 @@ import com.mtons.mblog.base.lang.Consts;
 import com.mtons.mblog.modules.repository.UserRepository;
 import com.mtons.mblog.modules.service.UserEventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,7 @@ public class UserEventServiceImpl implements UserEventService {
     @Autowired
     private UserRepository userRepository;
 
+    @CacheEvict(value = {Consts.CACHE_USER, Consts.CACHE_POST}, allEntries = true)
     @Override
     public void identityPost(Long userId, boolean plus) {
         userRepository.updatePosts(userId, (plus) ? Consts.IDENTITY_STEP : Consts.DECREASE_STEP);

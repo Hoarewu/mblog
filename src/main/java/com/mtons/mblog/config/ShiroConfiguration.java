@@ -76,10 +76,16 @@ public class ShiroConfiguration {
         hashMap.put("/login", "anon");
         hashMap.put("/user/**", "authc");
         hashMap.put("/settings/**", "authc");
+        /*
         hashMap.put("/post/editing", "authc");
         hashMap.put("/post/submit", "authc");
         hashMap.put("/post/delete/*", "authc");
         hashMap.put("/post/upload", "authc");
+        */
+        hashMap.put("/post/editing", "authc, perms[post:editing]");
+        hashMap.put("/post/submit", "authc, perms[post:submit]");
+        //hashMap.put("/post/delete/*", "authc, perms[post:delete]");
+        //hashMap.put("/post/upload", "authc, perms[post:upload]");
 
         hashMap.put("/admin/channel/list", "authc,perms[channel:list]");
         hashMap.put("/admin/channel/update", "authc,perms[channel:update]");
